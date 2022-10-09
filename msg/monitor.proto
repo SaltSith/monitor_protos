@@ -1,0 +1,46 @@
+syntax = "proto2";
+package monitor;
+
+import "util.proto";
+
+message HelloAsync {}
+
+message Temperature {
+    enum Element {
+        CPU = 1;
+        GPU = 2;
+    }
+    optional Element element = 1;
+    optional float temp = 2; 
+}
+
+message TemperatureAsync {
+    repeated Temperature temperatures = 1;
+}
+
+message TemperatureGetReq {}
+message TemperatureGetRes {
+    repeated Temperature temperatures = 1;
+}
+
+message VersionGetReq {}
+message VersionGetRes {
+    optional bytes version = 1;
+}
+
+message MonitorMsg {
+    optional util.MsgStatus msg_status = 1;
+    optional uint32 uid = 2;
+    optional uint64 timestamp = 3;
+    
+    // 4 - 9 ffu
+    
+    oneof msg {
+        HelloAsync hello_async = 10;
+        TemperatureAsync temperature_async = 11;
+        TemperatureGetReq temperature_get_req = 12;
+        TemperatureGetRes temperature_get_res = 13;
+        VersionGetReq version_get_req = 14;
+        VersionGetRes version_get_res = 15;
+    }
+}

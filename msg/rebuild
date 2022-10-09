@@ -1,0 +1,11 @@
+#pwd = `pwd`
+#protoc --nanopb_out="--options-file=monitor.options:$pwd" util.proto monitor.proto
+
+rm -Rf ../src
+mkdir ../src
+
+rm -Rf ../pb_py
+mkdir ../pb_py
+
+protoc --nanopb_out=../src/ util.proto monitor.proto
+protoc --python_out=../pb_py/ util.proto monitor.proto

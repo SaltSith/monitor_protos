@@ -1,0 +1,10 @@
+syntax = "proto2";
+package util;
+
+enum MsgStatus {
+    STATUS_OK = 0;
+    STATUS_UNKNOWN_MESSAGE = 1;
+}
+
+
+

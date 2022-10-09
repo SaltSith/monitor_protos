@@ -1,0 +1,3 @@
+monitor.TemperatureAsync.temperatures  max_count:10
+monitor.TemperatureGetRes.temperatures max_count:10
+monitor.VersionGetRes.version          max_size:32
