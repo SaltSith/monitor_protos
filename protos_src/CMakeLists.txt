@@ -1,2 +1,6 @@
-add_library(monitor_protos monitor.pb.h monitor.pb.c util.pb.h util.pb.h)
-INCLUDE_DIRECTORIES(../nanopb)
+add_library(monitor_protos
+            util.pb.h util.pb.c
+            monitor.pb.h monitor.pb.c)
+
+include_directories ("${PROJECT_SOURCE_DIR}/monitor_protos/nanopb")
+link_libraries(nanopb)
