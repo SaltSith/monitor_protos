@@ -38,5 +38,7 @@ pb_helper_decode_msg(uint8_t *in_buff, uint32_t in_buff_size, monitor_MonitorMsg
     bool result = pb_decode(&stream, monitor_MonitorMsg_fields, out_msg);
     assert(result == true);
 
+    free(in_buff);
+
     return 0;
 }
