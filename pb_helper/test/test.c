@@ -55,8 +55,6 @@ void test_pb_helper_encode_decode(void) {
 
     int decode_result = pb_helper_decode_msg(proto_buffer, bytes_written, &decoded);
     TEST_ASSERT(decode_result == 0);
-
-    free(proto_buffer);
 }
 
 
