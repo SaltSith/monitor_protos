@@ -15,6 +15,8 @@ int
 pb_helper_encode_msg(monitor_MonitorMsg *in_msg, uint8_t *out_buff, uint32_t out_buff_size)
 {
     if ((in_msg == NULL) || (out_buff == NULL)) {
+        if (in_msg) {free(in_msg);}
+        if (out_buff) {free(out_buff);}
         return -1;
     }
 
@@ -31,12 +33,16 @@ int
 pb_helper_decode_msg(uint8_t *in_buff, uint32_t in_buff_size, monitor_MonitorMsg *out_msg)
 {
     if ((in_buff == NULL) || (out_msg == NULL)) {
+        if (in_buff) {free(in_buff);}
+        if (out_msg) {free(out_msg);}
         return -1;
     }
 
     pb_istream_t stream = pb_istream_from_buffer(in_buff, in_buff_size);
     bool result = pb_decode(&stream, monitor_MonitorMsg_fields, out_msg);
     assert(result == true);
+
+    free(in_buff);
 
     return 0;
 }

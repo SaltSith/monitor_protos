@@ -8,22 +8,29 @@
 #include <stdbool.h>
 
 void test_pb_helper_encode_msg_in_msg_null_ptr(void) {
-    uint8_t out_buf[1];
-    TEST_ASSERT(pb_helper_encode_msg(NULL, out_buf, sizeof(out_buf)) == -1);
+    uint8_t *out_buf = malloc(sizeof(uint8_t));
+    TEST_ASSERT(out_buf != NULL);
+
+    TEST_ASSERT(pb_helper_encode_msg(NULL, out_buf, sizeof(uint8_t)) == -1);
 }
 
 void test_pb_helper_encode_msg_out_buf_null_ptr(void) {
-    monitor_MonitorMsg in_msg;
-    TEST_ASSERT(pb_helper_encode_msg(&in_msg, NULL, 1) == -1);
+    monitor_MonitorMsg *in_msg = malloc(sizeof(monitor_MonitorMsg));
+    TEST_ASSERT(in_msg != NULL);
+
+    TEST_ASSERT(pb_helper_encode_msg(in_msg, NULL, 1) == -1);
 }
 
 void test_pb_helper_decode_msg_in_buff_null_ptr(void) {
-    monitor_MonitorMsg out_msg;
-    TEST_ASSERT(pb_helper_decode_msg(NULL, 1, &out_msg) == -1);
+    monitor_MonitorMsg *out_msg = malloc(sizeof(monitor_MonitorMsg));
+    TEST_ASSERT(out_msg != NULL);
+    TEST_ASSERT(pb_helper_decode_msg(NULL, 1, out_msg) == -1);
 }
 
 void test_pb_helper_decode_msg_out_msg_null_ptr(void) {
-    uint8_t in_buff[1];
+    uint8_t *in_buff = malloc(sizeof(uint8_t));
+    TEST_ASSERT(in_buff != NULL);
+
     TEST_ASSERT(pb_helper_decode_msg(in_buff, sizeof(in_buff), NULL) == -1);
 }
 
@@ -55,8 +62,6 @@ void test_pb_helper_encode_decode(void) {
 
     int decode_result = pb_helper_decode_msg(proto_buffer, bytes_written, &decoded);
     TEST_ASSERT(decode_result == 0);
-
-    free(proto_buffer);
 }
 
 
